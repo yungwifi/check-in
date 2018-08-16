@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
+import { geolocated } from 'react-geolocated';
 
 class HomePage extends Component {
 
     state = {
-        currentLat: '',
-        currentLon: ''
+        lat: '',
+        long: '',
     }
 
     componentDidMount() {
+        console.log("Component did mount")
         this.getLocation()
     }
 
-    getLocation = () => {
-        var startPos
-        navigator.geolocation.getCurrentPosition(function (position) {
+    getLocation = async () => {
+        let startPos = {}
+        console.log("Get location ")
+        await navigator.geolocation.getCurrentPosition(function (position) {
             startPos = position
-            console.log(startPos)
+            console.log(position)
         })
-        this.setState({
-            currentLat: startPos.coords.latitude,
-            currentLon: startPos.coords.longitude
-        });
+        await setTimeout(
+            function () {
+                this.setState({
+                    lat: startPos.coordinates.latitude,
+                    long: startPos.coordinates.longitude
+                });
+            }.bind(this),
+            3000
+        );
     }
 
     render() {
