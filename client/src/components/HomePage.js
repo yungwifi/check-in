@@ -17,14 +17,14 @@ class HomePage extends Component {
         let startPos = {}
         console.log("Get location ")
         await navigator.geolocation.getCurrentPosition(function (position) {
-            startPos = position
-            console.log(position)
+            startPos = position.coords
+            console.log(startPos)
         })
         await setTimeout(
             function () {
                 this.setState({
-                    lat: startPos.coordinates.latitude,
-                    long: startPos.coordinates.longitude
+                    lat: startPos.latitude,
+                    long: startPos.longitude
                 });
             }.bind(this),
             3000
@@ -37,7 +37,7 @@ class HomePage extends Component {
                 <div> Hi Welcome </div>
                 <p>
                     Current Location (lat, lon):<br />
-                    <span>{this.currentLat}</span>°, <span>{this.currentLon}</span>°
+                    <span>{this.state.lat}</span>°, <span>{this.state.long}</span>°
                     </p>
             </div>
         );
