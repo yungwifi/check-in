@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import { geolocated } from 'react-geolocated';
 
 class HomePage extends Component {
 
     state = {
         lat: '',
         long: '',
+        loaded: false,
     }
 
     componentDidMount() {
-        console.log("Component did mount")
         this.getLocation()
     }
 
     getLocation = async () => {
         let startPos = {}
-        console.log("Get location ")
         await navigator.geolocation.getCurrentPosition(function (position) {
             startPos = position.coords
             console.log(startPos)
@@ -24,7 +22,8 @@ class HomePage extends Component {
             function () {
                 this.setState({
                     lat: startPos.latitude,
-                    long: startPos.longitude
+                    long: startPos.longitude,
+                    loaded: true
                 });
             }.bind(this),
             3000
@@ -32,6 +31,7 @@ class HomePage extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <div> Hi Welcome </div>
