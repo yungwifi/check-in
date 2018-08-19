@@ -4,8 +4,8 @@ To run this repo, clone down to you machine.
 
 run 
 
-'''npm i'''
+`npm i`
 
 then run 
 
-''' npm run dev '''
+`npm run dev`
