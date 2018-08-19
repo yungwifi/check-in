@@ -7,7 +7,7 @@ class HomePage extends Component {
 
         return (
             <div>
-                <Map lattitude={this.state.lat} longitude={this.state.long} />
+                <Map />
             </div>
         );
     }
