@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import styled from 'styled-components';
+import NavBar from './NavBar';
 
 const MapStyle = styled.div`
-height: 100vh;
-width: 100%;`
+height: 93vh;
+width: 81vw;`
+
+const MapContainer = styled.div`
+display: flex; 
+flex-direction: row;`
+
+const TopBar = styled.div`
+background-color: #2659DA;
+height: 7vh;
+width: 100vw;`
 
 const Loader = styled.div`
   position: absolute;
@@ -59,6 +69,8 @@ class Map extends Component {
         if (this.state.loading) {
             return (
                 <div>
+                    <TopBar />
+                    <NavBar />
                     Getting Your Location...
                 <Loader >
                     </Loader>
@@ -68,13 +80,17 @@ class Map extends Component {
 
         return (
             <div>
-                <MapStyle >
-                    <GoogleMapReact
-                        bootstrapURLKeys={{ key: "Google API Call Goes Here" }}
-                        defaultCenter={this.state.center}
-                        defaultZoom={this.state.zoom}>
-                    </GoogleMapReact>
-                </MapStyle>
+                <TopBar />
+                <MapContainer >
+                    <NavBar />
+                    <MapStyle >
+                        <GoogleMapReact
+                            bootstrapURLKeys={{ key: "Google API Call Goes Here" }}
+                            defaultCenter={this.state.center}
+                            defaultZoom={this.state.zoom}>
+                        </GoogleMapReact>
+                    </MapStyle>
+                </MapContainer>
             </div>
         );
     }
