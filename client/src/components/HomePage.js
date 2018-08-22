@@ -4,7 +4,9 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Button = styled.div`
-border: solid black 1px;`
+margin: 0 auto;
+display: flex;
+align-items: center;`
 
 const HomeStyle = styled.div`
 display: flex; 
@@ -28,7 +30,7 @@ class HomePage extends Component {
                         <NavBar />
                     </div>
                     <Button>
-                        <Link to="/map"><button> Map </button></Link>
+                        <Link to="/map"><button> Show My Location </button></Link>
                     </Button>
                 </HomeStyle>
             </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import styled from 'styled-components';
 import NavBar from './NavBar';
+import Pin from './Pin';
 
 const MapStyle = styled.div`
 height: 93vh;
@@ -17,15 +18,15 @@ height: 7vh;
 width: 100vw;`
 
 const Loader = styled.div`
-  position: absolute;
-  top: calc(50% - 4em);
-  left: calc(50% - 4em);
-  width: 6em;
-  height: 6em;
-  border: 1.1em solid rgba(0, 0, 0, 0.2);
-  border-left: 1.1em solid #000000;
-  border-radius: 50%;
-  animation: load8 1.1s infinite linear;
+position: absolute;
+top: calc(50% - 4em);
+left: calc(50% - 4em);
+width: 6em;
+height: 6em;
+border: 1.1em solid rgba(0, 0, 0, 0.2);
+border-left: 1.1em solid #000000;
+border-radius: 50%;
+animation: load8 1.1s infinite linear;
 }
 
 @keyframes load8 {
@@ -50,6 +51,14 @@ class Map extends Component {
     componentDidMount() {
         this.getLocation()
         setTimeout(() => this.setState({ loading: false }), 4000);
+
+    }
+
+    sessionData = (location) => {
+        sessionStorage.getItem('center');
+        sessionStorage.setItem('center.lat', location.lat)
+        sessionStorage.setItem('center.lng', location.lng);
+        console.log(sessionStorage)
     }
 
     getLocation = async () => {
@@ -62,6 +71,7 @@ class Map extends Component {
         await this.setState({
             center: center
         })
+        await this.sessionData(center)
     }
 
     render() {
@@ -70,10 +80,10 @@ class Map extends Component {
             return (
                 <div>
                     <TopBar />
-                    <NavBar />
-                    Getting Your Location...
-                <Loader >
-                    </Loader>
+                    <MapContainer >
+                        <NavBar />
+                        <Loader />
+                    </MapContainer>
                 </div>
             )
         }
@@ -85,9 +95,10 @@ class Map extends Component {
                     <NavBar />
                     <MapStyle >
                         <GoogleMapReact
-                            bootstrapURLKeys={{ key: "Google API Call Goes Here" }}
+                            bootstrapURLKeys={{ key: "AIzaSyDLQtPP_0GbahYkMROnV-7qYZIN1avWpwo" }}
                             defaultCenter={this.state.center}
                             defaultZoom={this.state.zoom}>
+                            <Pin lat={this.state.center.lat} lng={this.state.center.lng} />
                         </GoogleMapReact>
                     </MapStyle>
                 </MapContainer>

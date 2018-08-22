@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const NavContainer = styled.div`
 background-color: #2659DA;
-height: 92vh;
+height: 93vh;
 width: 19vw;
 display: flex;
 justify-content: center;
