@@ -5,7 +5,7 @@ class Pin extends Component {
     render() {
         return (
             <div>
-                You are Here
+                <img src='../../public/pin.png' />
             </div>
         );
     }

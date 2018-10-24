@@ -51,14 +51,6 @@ class Map extends Component {
     componentDidMount() {
         this.getLocation()
         setTimeout(() => this.setState({ loading: false }), 4000);
-
-    }
-
-    sessionData = (location) => {
-        sessionStorage.getItem('center');
-        sessionStorage.setItem('center.lat', location.lat)
-        sessionStorage.setItem('center.lng', location.lng);
-        console.log(sessionStorage)
     }
 
     getLocation = async () => {
@@ -71,7 +63,14 @@ class Map extends Component {
         await this.setState({
             center: center
         })
-        await this.sessionData(center)
+        this.sessionData(center)
+    }
+
+    sessionData = () => {
+        sessionStorage.getItem('center');
+        sessionStorage.setItem('center.lat', this.state.center.lat)
+        sessionStorage.setItem('center.lng', this.state.center.lng);
+        console.log(sessionStorage)
     }
 
     render() {
@@ -87,7 +86,6 @@ class Map extends Component {
                 </div>
             )
         }
-
         return (
             <div>
                 <TopBar />
@@ -95,7 +93,7 @@ class Map extends Component {
                     <NavBar />
                     <MapStyle >
                         <GoogleMapReact
-                            bootstrapURLKeys={{ key: "AIzaSyDLQtPP_0GbahYkMROnV-7qYZIN1avWpwo" }}
+                            bootstrapURLKeys={{ REACT_APP_GOOGLE_API_KEY }}
                             defaultCenter={this.state.center}
                             defaultZoom={this.state.zoom}>
                             <Pin lat={this.state.center.lat} lng={this.state.center.lng} />
